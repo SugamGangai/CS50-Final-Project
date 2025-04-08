@@ -1,6 +1,6 @@
 # Personal Budget Tracker
-# Video Demo: https://youtu.be/eRBag0_okdM
-# Description: 
+<h2>Video Demo: https://youtu.be/eRBag0_okdM</h2>
+<h3>Description:</h3> 
 Personal budget tracker is a web based program by me i.e Sugam Gangai as CS50 final project. Being at last stage of my teenage, I thought of importance of finance is going to be an important aspect in my adulthood, so I decided to work on this. It helps user to record, view and monitor their financial status.
 
 I have used HTML, CSS and javascript for the web end program. I have used flask and jingo to work with user's input and functionality with data. I also have used charts,js for the interactive statistics for the user. additionally I used CS50's codespace and some elements of finance problem set to make it work smooth.
