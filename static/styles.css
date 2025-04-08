@@ -1,0 +1,120 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+.icon-circle {
+    font-size: 1.1em; /* Increase size by 10% */
+    padding: 8px; /* Adjust padding if needed to make the circle uniform */
+    border: 2px solid rgba(128, 128, 128, 0.5); /* 50% opacity grey border */
+    border-radius: 50%; /* Make it circular */
+    display: inline-flex; /* Center the icon inside the circle */
+    align-items: center;
+    justify-content: center;
+}
+.header-container {
+    text-align: center;
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.sub-title {
+    font-size: 1.2em;
+    color: #264653; /* A slightly darker tone for contrast */
+    margin-top: 10px;
+    animation: slideIn 1s ease-in-out; /* Slide-in animation for subtitle */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Add hover effect for interactivity */
+.header-container:hover .main-title {
+    color: #e76f51; /* Slightly brighter color on hover */
+    transform: scale(1.05);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.header-container:hover .sub-title {
+    color: #e9c46a; /* Soft yellow for the subtitle on hover */
+    transition: color 0.3s ease;
+}
+footer {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 0.9em;
+    color: #777;
+}
+.typewriter{
+    display: flex;
+}
+.typewriter h4{
+    margin-inline: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 1px solid;
+    animation: typing 4s steps(22) forwards,
+    blink 1s step-end infinite;
+}
+@keyframes typing{
+    from{
+        width: 0;
+    }
+    to{
+        width: 100%;
+    }
+}
+@keyframes blink{
+    50%{
+        border-color: transparent;
+    }
+}
+.graphBox{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display; grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 30px;
+    min-height: 200px;
+}
+.graphBox .box{
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-radius: 20px;
+}
+@media (max-width: 991px){
+    .graphBox{
+        grid-template-column: 1fr;
+        height: auto;
+    }
+}

@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block title %}Statistics{% endblock %}
+{% block main %}
+
+<div class="container mt-4">
+    <h1 class="text-center">Statistics</h1>
+    <p class="text-center">Analyze your income and spending patterns</p>
+
+    <!-- Overview Section -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>Total Income</h5>
+                    <p>${{ total_income }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>Total Expenses</h5>
+                    <p>${{ total_expenses }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5>Net Savings</h5>
+                    <p style="color: {{ 'green' if net_savings >= 0 else 'red' }};">${{ net_savings }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Spending by Category</h5>
+            <canvas id="categoryPieChart1"></canvas>
+        </div>
+        <div class="col-md-6">
+            <h5>Income by Category</h5>
+            <canvas id="categoryPieChart2"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Data passed from Flask
+    var rent = {{ rent | tojson }};
+    var transportation = {{ transportation | tojson }};
+    var food = {{ food | tojson }};
+    var others1 = {{ others1 | tojson }};
+    var salary = {{ salary | tojson }};
+    var investment = {{ investment | tojson }};
+    var others2 = {{ others2 | tojson }};
+
+    // Expense Pie Chart
+    var categoryCtx1 = document.getElementById('categoryPieChart1').getContext('2d');
+    var categoryPieChart1 = new Chart(categoryCtx1, {
+        type: 'pie',
+        data: {
+            labels: ['Rent', 'Food', 'Transport', 'Entertainment', 'Others'], // Categories
+            datasets: [{
+                data: [rent, food, transportation, others1], // Dynamic data
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9F40', '#4BC0C0']
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+
+    // Income Pie Chart
+    var categoryCtx2 = document.getElementById('categoryPieChart2').getContext('2d');
+    var categoryPieChart2 = new Chart(categoryCtx2, {
+        type: 'pie',
+        data: {
+            labels: ['Salary', 'Investment', 'Others'], // Categories
+            datasets: [{
+                data: [salary, investment, others2], // Dynamic data
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+{% endblock %}

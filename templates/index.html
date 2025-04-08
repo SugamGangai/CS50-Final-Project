@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block head %}
+    <title>Dashboard</title>
+{% endblock %}
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid text-center">
+    <div class="header-container mt-4">
+
+        <h4 class="sub-title">Managing your finances for a secure future</h4>
+    </div>
+
+    <!-- Summary Cards Row -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-3 summary-card income-card">
+            <h5>Total Income</h5>
+            <p id="totalIncome">${{ total_income }}</p>
+        </div>
+
+        <div class="col-md-3 summary-card expense-card">
+            <h5>Total Expenses</h5>
+            <p id="totalExpenses">${{ total_expenses }}</p>
+        </div>
+
+        <div class="col-md-3 summary-card balance-card">
+            <h5>Net Balance</h5>
+            <p id="netBalance" style="color: {{ 'green' if net_balance >= 0 else 'red' }};">
+                ${{ net_balance }}
+            </p>
+        </div>
+    </div>
+
+    <!-- Chart Section -->
+    <div class="chart-container mx-auto mt-4" style="width: 80%; max-width: 800px;">
+        <canvas id="financeChart"></canvas>
+    </div>
+</div>
+
+<!-- JavaScript for Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+    var rent = {{ rent | tojson }};
+    var transportation = {{ transportation | tojson }};
+    var food = {{ food | tojson }};
+    var others1 = {{ others1 | tojson }};
+    var salary = {{ salary | tojson }};
+    var investment = {{ investment | tojson }};
+    var others2 = {{ others2 | tojson }};
+
+    var ctx = document.getElementById('financeChart').getContext('2d');
+    var financeChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Salary', 'Investment','Rent', 'Food', 'Transport', 'Others'], // Customize dynamically if needed
+            datasets: [
+                {
+                    label: 'Expenses',
+                    data: [0, 0, rent, food, transportation, others1], // Replace with dynamic values
+                    backgroundColor: '#dc3545'
+                },
+                {
+                    label: 'Income',
+                    data: [salary, investment, 0, 0, 0, others2], // Replace with dynamic values
+                    backgroundColor: '#28a745'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: { beginAtZero: true }
+                }]
+            }
+        }
+    });
+</script>
+<style>
+    /* Custom styles for dashboard elements */
+    .summary-card {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 8px;
+        color: white;
+        text-align: center;
+    }
+    .income-card { background-color: #28a745; }
+    .expense-card { background-color: #dc3545; }
+    .balance-card { background-color: #17a2b8; }
+    .chart-container {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+    }
+</style>
+{% endblock %}
